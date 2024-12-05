@@ -1,0 +1,10 @@
+<div>
+  <h3>Lista de eventos</h3>
+  <% @events_list.each do |event| %>
+    <p><%= event["id"] %> 
+    - <strong>NOME:</strong> <%= event.dig("orgaos", 0, "apelido") %> 
+    | <strong>INÍCIO:</strong> <%= event["dataHoraInicio"] %> 
+    | <strong>FIM:</strong> <%= event["dataHoraFim"] %> 
+    | <strong>SITUAÇÃO:</strong> <%= event["situacao"] %></p>
+  <% end %>
+</div>
