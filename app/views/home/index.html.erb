@@ -1,5 +1,5 @@
 <div>
-  <% @deputies_list.each do |deputy| %>
-    <p><%= deputy["nome"] %> - <%= deputy["siglaPartido"] %></p>
+  <% @deputies_list.map do |deputy| %>
+    <p><%= link_to deputy["nome"], root_path({ deputy_name: deputy["nome"], deputy_id: deputy["id"] }) %> - <%= deputy["siglaPartido"] %></p>
   <% end %>
 </div>

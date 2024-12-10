@@ -5,7 +5,7 @@ class Deputies
       "Accept" => "application/json"
     }
 
-    Rails.cache.fetch("deputies_all", expires_in: 1.day) do
+    Rails.cache.fetch("deputies_all", expires_in: 5.day) do
       response = Faraday.get(url, nil, headers)
       JSON.parse(response.body)
     end

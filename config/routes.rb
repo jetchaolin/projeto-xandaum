@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#main"
   resources :home, only: :index
-  get "home/events", to: "home#events"
+  get "home/detailed_events_list", to: "home#detailed_events_list"
+  get "home/show", to: "home#show"
+  get "home/date_select", to: "home#date_select"
 end

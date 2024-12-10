@@ -5,6 +5,7 @@
     - <strong>NOME:</strong> <%= event.dig("orgaos", 0, "apelido") %> 
     | <strong>INÍCIO:</strong> <%= event["dataHoraInicio"] %> 
     | <strong>FIM:</strong> <%= event["dataHoraFim"] %> 
-    | <strong>SITUAÇÃO:</strong> <%= event["situacao"] %></p>
+    | <strong>SITUAÇÃO:</strong> <%= event["situacao"] %>
+    <br><strong>DESCRIÇÃO:</strong> <%= truncate(event["descricao"], length: 200) %></p>
   <% end %>
 </div>
