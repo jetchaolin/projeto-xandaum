@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Projeto Xandaum
 
-Things you may want to cover:
+Este aplicativo permite que você explore informações detalhadas sobre deputados brasileiros e assuntos relacionados de maneira simples e eficiente.
 
-* Ruby version
+## Como Usar
 
-* System dependencies
+1. **Acesse a Lista de Deputados:**
+   - Na página inicial, você encontrará um link com uma lista nomes dos deputados.
+   - Clique no nome do deputado desejado.
 
-* Configuration
+2. **Selecione o Assunto:**
+   - Após clicar no deputado, você será redirecionado para a página inicial.
+   - Aqui, escolha o assunto de seu interesse em uma lista suspensa (drop-down list).
 
-* Database creation
+3. **Busca por Assunto:**
+   - Clique no botão de busca para procurar os dados relacionados ao assunto escolhido.
+   - Se o assunto exigir seleção de datas, você será redirecionado para uma nova página.
 
-* Database initialization
+4. **Selecione a Data (quando necessário):**
+   - Escolha as datas relevantes para sua pesquisa e clique novamente em buscar.
 
-* How to run the test suite
+5. **Resultados:**
+   - Os resultados da sua pesquisa serão exibidos na tela, com detalhes claros e links úteis, se aplicável.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Funcionalidades Principais
 
-* Deployment instructions
-
-* ...
+- Listagem de deputados atualizada.
+- Seleção de assuntos disponibilizados para o público.
