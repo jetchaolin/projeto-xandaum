@@ -41,8 +41,6 @@ class HomeController < ApplicationController
 
     @party_selected_acronym = params[:party_acronym]
     @party_selected_id = params[:party_id]
-
-
   end
   def show
     @result_page_data
