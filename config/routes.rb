@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get "home/detailed_events_list", to: "home#detailed_events_list"
   get "home/show", to: "home#show"
   get "home/date_select", to: "home#date_select"
+  get "home/parties_list", to: "home#parties_list"
 end
