@@ -1,11 +1,12 @@
 <div>
   <h3>Lista de eventos</h3>
   <% @events_list.each do |event| %>
-    <p><%= event["id"] %> 
-    - <strong>NOME:</strong> <%= event.dig("orgaos", 0, "apelido") %> 
-    | <strong>INÍCIO:</strong> <%= event["dataHoraInicio"] %> 
-    | <strong>FIM:</strong> <%= event["dataHoraFim"] %> 
-    | <strong>SITUAÇÃO:</strong> <%= event["situacao"] %>
-    <br><strong>DESCRIÇÃO:</strong> <%= truncate(event["descricao"], length: 200) %></p>
+    <p><%= link_to event["id"], root_path({ event_id: event["id"] }) %>
+      - <strong>NOME:</strong> <%= event.dig("orgaos", 0, "apelido") %>
+      | <strong>INÍCIO:</strong> <%= event["dataHoraInicio"] %>
+      | <strong>FIM:</strong> <%= event["dataHoraFim"] %>
+      | <strong>SITUAÇÃO:</strong> <%= event["situacao"] %>
+      <br>
+      <strong>DESCRIÇÃO:</strong> <%= truncate(event["descricao"], length: 200) %></p>
   <% end %>
 </div>

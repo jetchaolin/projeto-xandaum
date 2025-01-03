@@ -1,52 +1,25 @@
+<% @deputies_research ? @view_research_render = @deputies_research[:name] : @event_research ? @view_research_render = @event_research[:id] : @view_research_render = @parties_research[:acronym] %>
 <% if @result_page_data["dados"].is_a?(Hash) %>
   <div>
-    <p><strong>Nome:</strong> <%= @deputies_research[:name] %></p>
     <table border="1">
       <thead>
         <tr>
-          <th>Atributo</th>
-          <th>Valor</th>
+          <th>Chave</th>
+          <th>Informação</th>
         </tr>
       </thead>
       <tbody>
         <% @result_page_data["dados"].each do |key, value| %>
-          <% if value.is_a?(Hash) %>
-            <tr>
-              <td><%= key.capitalize %></td>
-              <td>
-                <table border="1">
-                  <% value.each do |sub_key, sub_value| %>
-                    <tr>
-                      <td><%= sub_key.capitalize %></td>
-                      <% if sub_value.is_a?(Hash) %>
-                        <% sub_value.each do |sub_sub_key, sub_sub_value| %>
-                          <td>
-                            <span><%= sub_sub_key.capitalize + ": " %></span>
-                            <span><%= sub_sub_value.is_a?(String) && sub_sub_value.start_with?("http") ? link_to("Link", sub_sub_value) : sub_sub_value %></span>
-                          </td>
-                        <% end %>
-                      <% else %>
-                        <td><%= sub_value.is_a?(String) && sub_value.start_with?("http") ? link_to("Link", sub_value) : sub_value %></td>
-                      <% end %>
-                    </tr>
-                  <% end %>
-                </table>
-              </td>
-            </tr>
-          <% else %>
-            <tr>
-              <td><%= key.capitalize %></td>
-              <td><%= value.is_a?(String) && value.start_with?("http") ? link_to("Link", value) : value %></td>
-            </tr>
-          <% end %>
+          <%= value_identifier(key, value) %>
         <% end %>
       </tbody>
     </table>
+    <p>v1</p>
   </div>
 <% elsif @result_page_data["dados"].is_a?(Array) && @result_page_data["dados"].empty? %>
   <div>
-    <p><strong>Nome:</strong> <%= @deputies_research[:name] %></p>
-    <p><strong>Assunto:</strong> 
+    <p><strong>Nome:</strong> <%= @view_research_render %></p>
+    <p><strong>Assunto:</strong>
       <%= @result_page_data["dados"].nil? || @result_page_data["dados"].empty? ? "Não encontrado" : @result_page_data["dados"] %>
     </p>
     <% if @result_page_data["links"].present? %>
@@ -59,22 +32,22 @@
         <% end %>
       </ul>
     <% end %>
+    <p>v2</p>
   </div>
 <% elsif @result_page_data["dados"].is_a?(Array) && !@result_page_data["dados"].empty? %>
   <% sorted_data = (@result_page_data["dados"]).sort_by do |item| 
-    [
-      item["mes"] ? -item["mes"].to_i : Float::INFINITY,
-      -item["id"].to_i
-    ]
-  end %>
-
+      [
+        item["mes"] ? -item["mes"].to_i : Float::INFINITY,
+        -item["id"].to_i
+      ]
+    end %>
   <div>
-    <p>Nome: <%= @deputies_research[:name] %> </p>
+    <p>Nome: <%= @view_research_render %> </p>
     <table border="1">
       <thead>
         <tr>
           <% sorted_data.first.keys.each do |key| %>
-            <th><%= key.capitalize %></th>
+            <th><%= content_tag(:strong, key.capitalize) %></th>
           <% end %>
         </tr>
       </thead>
@@ -82,15 +55,17 @@
         <% sorted_data.each do |item| %>
           <tr>
             <% item.each_value do |value| %>
-              <td><%= value.is_a?(String) && value.start_with?("http") ? link_to("Link", value) : value %></td>
+              <td><%= render_hash_value(value) %></td>
             <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <p>v3</p>
   </div>
 <% else %>
   <div>
-    <p><%= @result_page_data || "<strong>Não foi possível encontrar</strong>" %></p> 
+    <p><%= @result_page_data || "<strong>Não foi possível encontrar</strong>" %></p>
+    <p>v4</p>
   </div>
 <% end %>

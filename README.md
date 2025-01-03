@@ -2,7 +2,7 @@
 
 # Projeto Xandaum
 
-Este aplicativo permite que você explore informações detalhadas sobre deputados brasileiros e assuntos relacionados de maneira simples e eficiente.
+Este aplicativo permite que você explore informações detalhadas sobre deputados brasileiros e assuntos relacionados de maneira simples e eficiente. Os dados são disponibilizados pela API oficial da camara dos deputados [Link do site com as instruções](https://dadosabertos.camara.leg.br/swagger/api.html), [Link da API](https://dadosabertos.camara.leg.br/api/v2/).
 
 ## Como Usar
 

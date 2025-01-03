@@ -1,19 +1,26 @@
 <%= form_with url: home_show_path, class: 'form', method: :get do |f| %>
-
+  <% if @deputy_selected_name.present? %>
     <%= f.label :name, 'Nome do deputado' %>
     <%= f.text_field :name, value: (@deputy_selected_name || nil), disabled: true %>
     <%= f.hidden_field :name, value: @deputy_selected_name %>
-
     <%= f.label :id, 'ID do deputado' %>
     <%= f.text_field :id, value: (@deputy_selected_id || nil), disabled: true %>
     <%= f.hidden_field :id, value: @deputy_selected_id %>
-
     <%= f.label :research, 'Assunto' %>
     <%= f.text_field :research, value: (@deputy_selected_research || nil), disabled: true %>
     <%= f.hidden_field :research, value: @deputy_selected_research %>
-
-  <%= f.label :initial_date, 'Data inicial' %>
-  <%= f.text_field :initial_date, type: 'date' %>
-
-  <%= f.submit 'Buscar' %>
+    <%= f.label :initial_date, 'Data inicial' %>
+    <%= f.text_field :initial_date, type: 'date' %>
+    <%= f.submit 'Buscar' %>
+  <% else %>
+    <%= f.label :id, 'ID do evento' %>
+    <%= f.text_field :id, value: (@event_selected_id || nil), disabled: true %>
+    <%= f.hidden_field :id, value: @event_selected_id %>
+    <%= f.label :option, 'Opção' %>
+    <%= f.text_field :option, value: (@event_selected_option || nil), disabled: true %>
+    <%= f.hidden_field :option, value: @event_selected_option %>
+    <%= f.label :initial_date, 'Data inicial' %>
+    <%= f.text_field :initial_date, type: 'date' %>
+    <%= f.submit 'Buscar' %>
+  <% end %>
 <% end %>
