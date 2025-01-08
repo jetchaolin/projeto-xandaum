@@ -1,7 +1,7 @@
 module ApplicationHelper
   def render_value(value)
     if value.is_a?(String) && value.start_with?("http")
-      if (value.include?("youtube.com") || value.include?("youtu.be")) && !value.include?("/@")
+      if (value.include?("youtube.com") || value.include?("youtu.be")) && !value.include?("/@") && !value.include?("channel")
         render_youtube_video(value)
       elsif value.include?("instagram") || value.include?("twitter") || value.include?("facebook") || value.include?("linkedin") || value.include?("x") || value.include?("youtube")
         link_to("#{value}", value)

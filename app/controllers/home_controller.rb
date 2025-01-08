@@ -29,6 +29,13 @@ class HomeController < ApplicationController
       "tiposEvento"
     ]
     @event_selected_id = params[:event_id]
+
+    @vote_option_subject = [
+      "votacoes",
+      "orientacoes",
+      "votos"
+    ]
+    @vote_selected_id = params[:vote_id]
   end
   def index
     @deputies_list = Deputies.all["dados"]
@@ -41,6 +48,9 @@ class HomeController < ApplicationController
 
     @party_selected_acronym = params[:party_acronym]
     @party_selected_id = params[:party_id]
+  end
+  def votes
+    @votes = Votes.all["dados"]
   end
   def show
     @result_page_data
@@ -64,7 +74,7 @@ class HomeController < ApplicationController
       @deputy_selected_name = params[:name]
       @deputy_selected_research = params[:research]
       @deputy_selected_id = params[:id]
-    else
+    elsif params[:option].present?
       @event_option_subject = [
         "eventos",
         "deputados",
@@ -78,6 +88,14 @@ class HomeController < ApplicationController
       ]
       @event_selected_id = params[:event_id]
       @event_selected_option = params[:options]
+    else
+      @vote_option_subject = [
+        "votacoes",
+        "orientacoes",
+        "votos"
+    ]
+    @vote_selected_id = params[:vote_id]
+    @vote_selected_option = params[:options]
     end
   end
 
@@ -142,6 +160,25 @@ class HomeController < ApplicationController
         result_page_data_func(ClientEventResearch, @event_research).nil? ? (redirect_to home_detailed_events_list_path) : result_page_data_func(ClientEventResearch, @event_research)
       else
         redirect_to home_date_select_path(@event_research)
+      end
+    elsif params[:vote_options].present?
+      @date_selector = [
+        "votacoes",
+        "orientacoes",
+        "votos"
+      ]
+      options = params[:vote_options]
+      id = params[:vote_id]
+      if @date_selector.include?(options)
+        @votes_research = { id: id, options: options }
+        result_page_data_func(ClientVotesResearch, @votes_research).nil? ? (redirect_to home_votes_path) : result_page_data_func(ClientVotesResearch, @votes_research)
+      elsif params[:initial_date].present?
+        date = params[:initial_date]
+
+        @vote_research[:initial_date] = date
+        result_page_data_func(ClientVotesResearch, @votes_research).nil? ? (redirect_to home_votes_path) : result_page_data_func(ClientVotesResearch, @votes_research)
+      else
+        redirect_to home_date_select_path(@votes_research)
       end
     else
       acronym = params[:party_acronym]
