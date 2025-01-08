@@ -1,0 +1,10 @@
+<div>
+  <h3>Lista de votações</h3>
+  <% @votes.each do |vote| %>
+    <p><%= link_to vote["id"], root_path({ vote_id: vote["id"] }) %>
+      - <strong>NOME:</strong> <%= truncate(vote["descricao"], length: 180) %>
+      | <strong>DATA:</strong> <%= vote["data"] %>
+      | <strong>REGISTRO:</strong> <%= vote["dataHoraRegistro"] %>
+      | <strong>RESULTADO:</strong> <%= vote["aprovacao"] %>
+    <% end %>
+  </div>

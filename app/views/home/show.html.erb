@@ -1,4 +1,4 @@
-<% @deputies_research ? @view_research_render = @deputies_research[:name] : @event_research ? @view_research_render = @event_research[:id] : @view_research_render = @parties_research[:acronym] %>
+<% @deputies_research ? @view_research_render = @deputies_research[:name] : @event_research ? @view_research_render = @event_research[:id] : @votes_research ? @view_research_render = @votes_research[:id] : @view_research_render = @parties_research[:acronym] %>
 <% if @result_page_data["dados"].is_a?(Hash) %>
   <div>
     <table border="1">
