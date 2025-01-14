@@ -11,15 +11,15 @@ class ClientDeputiesResearch
       return { "dados": "Deputado não encontrado" }
     end
 
-    if @user_research[:research] == "deputado"
+    if @user_research[:options] == "deputado"
       @url = "https://dadosabertos.camara.leg.br/api/v2/deputados/#{@found_deputy[:id]}"
-    elsif @user_research[:research] == ("lideres" || "mesa")
-      @url = "https://dadosabertos.camara.leg.br/api/v2/legislaturas/#{@found_deputy[:id]}/#{@user_research[:research]}"
+    elsif @user_research[:options] == ("lideres" || "mesa")
+      @url = "https://dadosabertos.camara.leg.br/api/v2/legislaturas/#{@found_deputy[:id]}/#{@user_research[:options]}"
     elsif @user_research[:initial_date].present?
       @initial_date = "?dataInicio=#{@user_research[:initial_date]}&ordenarPor=dataHoraInicio&ordem=DESC"
-      @url = "https://dadosabertos.camara.leg.br/api/v2/deputados/#{@found_deputy[:id]}/#{@user_research[:research]}#{@initial_date}"
+      @url = "https://dadosabertos.camara.leg.br/api/v2/deputados/#{@found_deputy[:id]}/#{@user_research[:options]}#{@initial_date}"
     else
-      @url = "https://dadosabertos.camara.leg.br/api/v2/deputados/#{@found_deputy[:id]}/#{@user_research[:research]}"
+      @url = "https://dadosabertos.camara.leg.br/api/v2/deputados/#{@found_deputy[:id]}/#{@user_research[:options]}"
     end
 
     headers = {

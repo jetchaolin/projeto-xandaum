@@ -1,0 +1,12 @@
+<turbo-frame id="events_form">
+  <span>
+    <%= form_with url: home_show_path, class: 'form', method: :get, data: { turbo: "false" } do |f| %>
+      <%= f.label :event_id, 'ID do evento' %>
+      <%= f.text_field :event_id, value: (@event_selected_id || nil), disabled: true %>
+      <%= f.hidden_field :event_id, value: @event_selected_id %>
+      <%= f.label :options, 'Opções' %>
+      <%= select_tag 'options', options_for_select(@event_option_subject.sort, @event_option_subject.first) %>
+      <%= f.submit 'Buscar' %>
+    <% end %>
+  </span>
+</turbo-frame>

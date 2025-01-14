@@ -1,0 +1,14 @@
+<turbo-frame id="deputies-form">
+  <span>
+    <%= form_with url: home_show_path, class: 'form', method: :get, data: { turbo: "false" } do |f| %>
+      <%= f.label :name, 'Nome do deputado' %>
+      <%= f.text_field :name, placeholder: 'Selecione na lista', value: (@deputy_selected_name || nil) %>
+      <%= f.label :id, 'ID do deputado' %>
+      <%= f.text_field :id, value: (@deputy_selected_id || nil), disabled: true %>
+      <%= f.hidden_field :id, value: @deputy_selected_id %>
+      <%= f.label :research, 'Assunto' %>
+      <%= select_tag 'research', options_for_select(@deputies_research_subject.sort, @deputies_research_subject.first) %>
+      <%= f.submit 'Buscar' %>
+    <% end %>
+  </span>
+</turbo-frame>

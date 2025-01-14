@@ -1,0 +1,10 @@
+<span>
+  <%= form_with url: home_show_path, class: 'form', method: :get, data: { turbo: "false" } do |f| %>
+    <%= f.label :vote_id, 'ID da votação' %>
+    <%= f.text_field :vote_id, value: (@vote_selected_id || nil), disabled: true %>
+    <%= f.hidden_field :vote_id, value: @vote_selected_id %>
+    <%= f.label :vote_options, 'Opções' %>
+    <%= select_tag 'vote_options', options_for_select(@vote_option_subject.sort, @vote_option_subject.first) %>
+    <%= f.submit 'Buscar' %>
+  <% end %>
+</span>

@@ -1,37 +1,5 @@
 <div>
   <nav>
-    <span>
-      <%= form_with url: home_show_path, class: 'form', method: :get do |f| %>
-        <%= f.label :name, 'Nome do deputado' %>
-        <%= f.text_field :name, placeholder: 'Selecione na lista', value: (@deputy_selected_name || nil) %>
-        <%= f.label :id, 'ID do deputado' %>
-        <%= f.text_field :id, value: (@deputy_selected_id || nil), disabled: true %>
-        <%= f.hidden_field :id, value: @deputy_selected_id %>
-        <%= f.label :research, 'Assunto' %>
-        <%= select_tag 'research', options_for_select(@deputies_research_subject.sort, @deputies_research_subject.first) %>
-        <%= f.submit 'Buscar' %>
-      <% end %>
-    </span>
-    <span>
-      <%= form_with url: home_show_path, class: 'form', method: :get do |f| %>
-        <%= f.label :event_id, 'ID do evento' %>
-        <%= f.text_field :event_id, value: (@event_selected_id || nil), disabled: true %>
-        <%= f.hidden_field :event_id, value: @event_selected_id %>
-        <%= f.label :options, 'Opções' %>
-        <%= select_tag 'options', options_for_select(@event_option_subject.sort, @event_option_subject.first) %>
-        <%= f.submit 'Buscar' %>
-      <% end %>
-    </span>
-    <span>
-      <%= form_with url: home_show_path, class: 'form', method: :get do |f| %>
-        <%= f.label :vote_id, 'ID da votação' %>
-        <%= f.text_field :vote_id, value: (@vote_selected_id || nil), disabled: true %>
-        <%= f.hidden_field :vote_id, value: @vote_selected_id %>
-        <%= f.label :vote_options, 'Opções' %>
-        <%= select_tag 'vote_options', options_for_select(@vote_option_subject.sort, @vote_option_subject.first) %>
-        <%= f.submit 'Buscar' %>
-      <% end %>
-    </span>
   </nav>
   <ul>
     <li><%= link_to 'Lista de deputados', home_index_path %></li>

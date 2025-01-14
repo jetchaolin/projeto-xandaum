@@ -1,10 +1,15 @@
 <div>
+  <%= turbo_frame_tag "votes_form" do %>
+    <%= render partial: "home/partials/votes_form" %>
+  <% end %>
   <h3>Lista de votações</h3>
   <% @votes.each do |vote| %>
-    <p><%= link_to vote["id"], root_path({ vote_id: vote["id"] }) %>
+    <%# Navigates to the home page filling the ID field so the user can search %>
+    <p><%= link_to vote["id"], home_votes_path({ vote_id: vote["id"] }) %>
       - <strong>NOME:</strong> <%= truncate(vote["descricao"], length: 180) %>
       | <strong>DATA:</strong> <%= vote["data"] %>
       | <strong>REGISTRO:</strong> <%= vote["dataHoraRegistro"] %>
       | <strong>RESULTADO:</strong> <%= vote["aprovacao"] %>
-    <% end %>
-  </div>
+    </p>
+  <% end %>
+</div>
