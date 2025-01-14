@@ -3,7 +3,7 @@ class ClientPartiesResearch
     @parties_research = parties_research
     @get_parties_list_from_the_api = Rails.cache.read("parties_all") ? Rails.cache.fetch("parties_all") : Parties.all
     @filtered_parties_ids_and_acronym = @get_parties_list_from_the_api["dados"].map do |party|
-      { id: (party["id"]).to_s, acronym: @parties_research[:acronym] }
+      { id: (party["id"]).to_s, options: @parties_research[:options] }
     end
     @found_party = @filtered_parties_ids_and_acronym.find { |item| item[:id] == @parties_research[:id] }
 

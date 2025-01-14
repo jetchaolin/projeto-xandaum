@@ -1,7 +1,7 @@
-class ClientEventResearch
+class ClientEventsResearch
   def self.search(events_research)
     @events_research = events_research
-    @get_events_list_from_the_api = Rails.cache.read("events_all") ? Rails.cache.fetch("events_all") : Events.all
+    @get_events_list_from_the_api = Rails.cache.read("filtered_events") ? Rails.cache.read("filtered_events") : Rails.cache.read("events_all") ? Rails.cache.fetch("events_all") : Events.all
     @filtered_events_ids_and_options = @get_events_list_from_the_api["dados"].map do |event|
       { id: (event["id"]).to_s, options: @events_research[:options] }
     end
@@ -23,10 +23,10 @@ class ClientEventResearch
     else
       @url = "https://dadosabertos.camara.leg.br/api/v2/eventos/#{@found_event[:id]}/#{@events_research[:options]}"
     end
-
     headers = {
       "Accept" => "application/json"
     }
+
     response = Faraday.get(@url, nil, headers)
     JSON.parse(response.body)
   end
