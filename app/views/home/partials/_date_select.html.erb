@@ -1,6 +1,6 @@
-<turbo-frame id="events_form">
+<turbo-frame id="date_form">
   <spam>
-    <%= form_with url: home_detailed_events_list_path, class: 'form', method: :get, data: { turbo_frame: "events_list" } do |f| %>
+    <%= form_with url: request.url, class: 'form', method: :get, data: { turbo_frame: (turbo_helper) } do |f| %>
       <%= f.label :initial_date, 'Data inicial' %>
       <%= f.text_field :initial_date, type: 'date' %>
       <%= f.label :final_date, 'Data final' %>

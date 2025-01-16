@@ -19,6 +19,7 @@ class ClientPartiesResearch
     }
     response1 = JSON.parse(Faraday.get(@url1, nil, headers).body)
     response2 = JSON.parse(Faraday.get(@url2, nil, headers).body)
+    Rails.logger.debug "URLs: #{response1.dig('links', 0, 'href')} - #{response2.dig('links', 0, 'href')}"
     result = { "dados": [ { partido: response1["dados"] }, { membros: response2["dados"] } ] }
     json_result = { body: result.to_json }
     JSON.parse(json_result[:body])
