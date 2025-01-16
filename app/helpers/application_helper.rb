@@ -150,4 +150,11 @@ module ApplicationHelper
   def render_youtube_video(url)
     content_tag(:iframe, nil, width: 480, height: 240, src: url.gsub("watch?v=", "embed/"), frameborder: 0, allowfullscreen: true)
   end
+  def turbo_helper
+    if request.url == "http://localhost:3000/home/votes"
+      "votes_list"
+    elsif request.url == "http://localhost:3000/home/detailed_events_list"
+      "events_list"
+    end
+  end
 end
