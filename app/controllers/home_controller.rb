@@ -28,8 +28,8 @@ class HomeController < ApplicationController
       "orgaos",
       "pauta",
       "votacoes",
-      "situacoesEvento",
-      "tiposEvento"
+      "situacoesEvento"
+      # "tiposEvento"
     ]
     @event_selected_id = params[:event_id]
 
@@ -37,6 +37,9 @@ class HomeController < ApplicationController
       @initial_date = params[:initial_date] || nil
       @final_date = params[:final_date] || nil
       @events_list = Events.by_date(@initial_date, @final_date)["dados"]
+      if @events_list.nil?
+        @events_list = Events.all["dados"]
+      end
     else
       @events_list = Events.all["dados"]
     end
@@ -54,7 +57,16 @@ class HomeController < ApplicationController
       "votos"
     ]
     @vote_selected_id = params[:vote_id]
-    @votes = Votes.all["dados"]
+    if (params[:initial_date] || params[:final_date]).present?
+      @initial_date = params[:initial_date] || nil
+      @final_date = params[:final_date] || nil
+      @votes_list = Votes.by_date(@initial_date, @final_date)["dados"]
+      if @votes_list.nil?
+        @votes_list = Votes.all["dados"]
+      end
+    else
+      @votes_list = Votes.all["dados"]
+    end
   end
   def show
     @result_page_data
@@ -76,7 +88,7 @@ class HomeController < ApplicationController
         "ocupacoes"
       ]
       @deputy_selected_name = params[:name]
-      @deputy_selected_research = params[:research]
+      @deputy_selected_research = params[:options]
       @deputy_selected_id = params[:id]
     elsif params[:option].present?
       @event_option_subject = [
@@ -105,18 +117,19 @@ class HomeController < ApplicationController
 
   private
 
-  def result_page_data_func(client, option)
-    @result_page_data = client.search(option)
+  def result_page_data(client, option)
+    @result_page_data ||= client.search(option)
   end
   def research_filter_func(client, option, initial_date = nil)
     search = option[:options]
     if @date_selector.include?(search)
-      result_page_data_func(client, option).nil? ? (redirect_to request.fullpath) : result_page_data_func(client, option)
-    elsif params[:initial_date].present?
-      date = params[:initial_date]
+      result_page_data(client, option).nil? ? (redirect_to request.fullpath) : result_page_data(client, option)
+    elsif (params[:initial_date] || params[:final_date]).present?
+      date = [ params[:initial_date], params[:final_date] ]
 
-      option[:initial_date] = date
-      result_page_data_func(client, option).nil? ? (redirect_to request.fullpath) : result_page_data_func(client, option)
+      option[:initial_date] = (date[0] || nil)
+      option[:final_date] = (date[1] || nil)
+      result_page_data(client, option).nil? ? (redirect_to request.fullpath) : result_page_data(client, option)
     else
       redirect_to home_date_select_path(option)
     end
@@ -136,7 +149,7 @@ class HomeController < ApplicationController
         "situacoesDeputado"
       ]
       name = params[:name]
-      research = params[:research]
+      research = (params[:research] || params[:options])
       id = params[:id]
 
       @deputies_research = { name: name, id: id, options: research }
@@ -181,7 +194,7 @@ class HomeController < ApplicationController
 
       @parties_research = { id: id, acronym: acronym }
 
-      result_page_data_func(ClientPartiesResearch, @parties_research).nil? ? (redirect_to home_parties_list_path) : result_page_data_func(ClientPartiesResearch, @parties_research)
+      result_page_data(ClientPartiesResearch, @parties_research).nil? ? (redirect_to home_parties_list_path) : result_page_data(ClientPartiesResearch, @parties_research)
     end
   end
 end

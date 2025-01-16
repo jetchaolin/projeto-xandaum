@@ -18,8 +18,13 @@ class ClientEventsResearch
     elsif @events_research[:options] == ("codSituacaoEvento" || "codTipoEvento")
       @url = "https://dadosabertos.camara.leg.br/api/v2/referencias/eventos/#{@events_research[:options]}"
     elsif @events_research[:initial_date].present?
-      @initial_date = "?dataInicio=#{@events_research[:initial_date]}&ordenarPor=dataHoraInicio&ordem=DESC"
-      @url = "https://dadosabertos.camara.leg.br/api/v2/eventos/#{@found_event[:id]}/#{@events_research[:options]}#{@initial_date}"
+      params = {
+        dataInicio: @user_research[:initial_date],
+        dataFim: @user_research[:final_date],
+        ordenarPor: "dataHoraInicio",
+        ordem: "DESC",
+      }.compact_blank
+      @url = "https://dadosabertos.camara.leg.br/api/v2/eventos/#{@found_event[:id]}/#{@events_research[:options]}"
     else
       @url = "https://dadosabertos.camara.leg.br/api/v2/eventos/#{@found_event[:id]}/#{@events_research[:options]}"
     end
@@ -27,7 +32,9 @@ class ClientEventsResearch
       "Accept" => "application/json"
     }
 
-    response = Faraday.get(@url, nil, headers)
-    JSON.parse(response.body)
+    response = Faraday.get(@url, (params || nil), headers)
+    result = JSON.parse(response.body)
+    Rails.logger.debug "URL: #{result.dig('links', 0, 'href')}"
+    result
   end
 end
