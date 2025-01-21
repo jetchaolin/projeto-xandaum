@@ -1,0 +1,8 @@
+<div>
+  <% @parties_list.map do |party| %>
+    <p>
+      <%= link_to party["sigla"], party_path(id: party["id"], params: { party_acronym: party["nome"], party_id: party["id"] }) %>
+      <%= party["nome"] == (party["sigla"].downcase!).capitalize ? "" : "(#{party["nome"]})" %>
+    </p>
+  <% end %>
+</div>

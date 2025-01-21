@@ -1,0 +1,11 @@
+<turbo-frame id="date_form">
+  <spam>
+    <%= form_with url: events_path, class: 'form', method: :get, data: { turbo_frame: "events_list" } do |f| %>
+      <%= f.label :initial_date, 'Data inicial' %>
+      <%= f.text_field :initial_date, type: 'date' %>
+      <%= f.label :final_date, 'Data final' %>
+      <%= f.text_field :final_date, type: 'date' %>
+      <%= f.submit 'Filtrar' %>
+    <% end %>
+  </spam>
+</turbo-frame>

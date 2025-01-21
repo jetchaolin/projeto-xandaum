@@ -1,0 +1,16 @@
+<%= form_with url: deputy_path(id: @deputy_selected_id, params: { name: @deputy_selected_name, research: @deputy_selected_research }), class: 'form', method: :get do |f| %>
+  <%= f.label :name, 'Nome do deputado' %>
+  <%= f.text_field :name, value: (@deputy_selected_name || nil), disabled: true %>
+  <%= f.hidden_field :name, value: @deputy_selected_name %>
+  <%= f.label :id, 'ID do deputado' %>
+  <%= f.text_field :id, value: (@deputy_selected_id || nil), disabled: true %>
+  <%= f.hidden_field :id, value: @deputy_selected_id %>
+  <%= f.label :options, 'Assunto' %>
+  <%= f.text_field :options, value: (@deputy_selected_research || nil), disabled: true %>
+  <%= f.hidden_field :options, value: @deputy_selected_research %>
+  <%= f.label :initial_date, 'Data inicial' %>
+  <%= f.text_field :initial_date, type: 'date' %>
+  <%= f.label :final_date, 'Data final' %>
+  <%= f.text_field :final_date, type: 'date' %>
+  <%= f.submit 'Buscar' %>
+<% end %>

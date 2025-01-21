@@ -3,7 +3,7 @@ module ApplicationHelper
     if value.is_a?(String) && value.start_with?("http")
       if (value.include?("youtube.com") || value.include?("youtu.be")) && !value.include?("/@") && !value.include?("channel")
         render_youtube_video(value)
-      elsif value.include?("instagram") || value.include?("twitter") || value.include?("facebook") || value.include?("linkedin") || value.include?("x") || value.include?("youtube")
+      elsif value.include?("instagram") || value.include?("twitter") || value.include?("facebook") || value.include?("linkedin") || value.include?("x.com") || value.include?("youtube")
         link_to("#{value}", value)
       elsif value.end_with?(".jpeg", ".jpg", ".png")
         image_tag(value, size: "100x100")
@@ -87,7 +87,7 @@ module ApplicationHelper
     else
       content_tag(:tr) do
         content_tag(:td, content_tag(:strong, (key.to_s).capitalize)) +
-        content_tag(:td, value)
+        content_tag(:td, render_value(value))
       end
     end
   end
@@ -153,7 +153,7 @@ module ApplicationHelper
   def turbo_helper
     if request.url == "http://localhost:3000/home/votes"
       "votes_list"
-    elsif request.url == "http://localhost:3000/home/detailed_events_list"
+    elsif request.url == "http://localhost:3000/home/events"
       "events_list"
     end
   end

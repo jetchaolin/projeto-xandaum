@@ -1,6 +1,6 @@
 <turbo-frame id="events_form">
   <span>
-    <%= form_with url: home_show_path, class: 'form', method: :get, data: { turbo: "false" } do |f| %>
+    <%= form_with url: event_path(id: @event_selected_id || 1), class: 'form', method: :get, data: { turbo: "false" } do |f| %>
       <%= f.label :event_id, 'ID do evento' %>
       <%= f.text_field :event_id, value: (@event_selected_id || nil), disabled: true %>
       <%= f.hidden_field :event_id, value: @event_selected_id %>
