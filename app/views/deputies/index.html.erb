@@ -1,0 +1,8 @@
+<div>
+  <%= turbo_frame_tag "deputies_form" do %>
+    <%= render partial: "deputies/partials/deputies_form" %>
+  <% end %>
+  <% @deputies_list.map do |deputy| %>
+    <p><%= link_to deputy["nome"], deputies_path(id: deputy["id"], params: { deputy_name: deputy["nome"], deputy_id: deputy["id"] }), method: :post, data: { turbo_frame: "deputies_form"} %> - <%= deputy["siglaPartido"] %></p>
+  <% end %>
+</div>

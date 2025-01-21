@@ -14,7 +14,7 @@ class Votes
     params = {
       dataInicio: initial_date,
       dataFim: final_date,
-      ordenarPor: "dataHoraInicio",
+      ordenarPor: "dataHoraRegistro",
       ordem: "DESC",
     }.compact_blank
 

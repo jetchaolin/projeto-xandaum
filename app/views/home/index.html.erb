@@ -1,8 +1,30 @@
 <div>
-  <%= turbo_frame_tag "deputies_form" do %>
-    <%= render partial: "home/partials/deputies_form" %>
-  <% end %>
-  <% @deputies_list.map do |deputy| %>
-    <p><%= link_to deputy["nome"], home_index_path({ deputy_name: deputy["nome"], deputy_id: deputy["id"] }),method: :post , data: { turbo_frame: "deputies_form"} %> - <%= deputy["siglaPartido"] %></p>
-  <% end %>
+  <nav>
+  </nav>
+  <ul>
+    <li>
+      <h3><%= link_to 'Deputados', deputies_path %></h3>
+      <p>- Selecione o deputado desejado clicando em seu nome<br>
+        - Selecione o assunto através do menu<br>
+        - Clique em buscar</p>
+    </li>
+    <li>
+      <h3><%= link_to 'Eventos', events_path %></h3>
+      <p>- Selecione o evento desejado clicando em seu ID ou intervalo entre as datas através dos calendários<br>
+        - Selecione a opção desejada através do menu<br>
+        - Clique em buscar
+      </p>
+    </li>
+    <li>
+      <h3><%= link_to 'Partidos', parties_path %></h3>
+      <p>- Selecione o partido desejado clicando em sua sigla</p>
+    </li>
+    <li>
+      <h3><%= link_to 'Votações', votes_path %></h3>
+      <p>- Selecione a votação desejada clicando em seu ID ou intervalo entre as datas através dos calendários<br>
+        - Selecione a opção desejada através do menu<br>
+        - Clique em buscar
+      </p>
+    </li>
+  </ul>
 </div>
