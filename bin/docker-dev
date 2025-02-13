@@ -1,0 +1,1 @@
+docker run -v "$(pwd):/rails" -p 8080:80 -w /rails --user $(id -u):$(id -g) --name web-app --rm projeto-xandaum-img
