@@ -300,8 +300,6 @@ GEM
       rubocop-minitest
       rubocop-performance
       rubocop-rails
-    ruby-graphviz (1.2.5)
-      rexml
     ruby-progressbar (1.13.0)
     rubyzip (2.4.1)
     securerandom (0.4.1)
@@ -410,7 +408,6 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.0.1)
   rubocop-rails-omakase
-  ruby-graphviz (~> 1.2.5)
   selenium-webdriver
   solid_cable
   solid_cache
