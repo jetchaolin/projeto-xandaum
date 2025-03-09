@@ -14,7 +14,7 @@ Rails.application.configure do
 
   # Enable server timing.
   config.server_timing = true
-  
+
   config.web_console.permissions = "172.18.0.1"
 
   # Enable/disable Action Controller caching. By default Action Controller caching is disabled.

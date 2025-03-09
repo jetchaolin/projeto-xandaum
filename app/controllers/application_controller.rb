@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   private
-    
+
   def result_page_data(client, option)
     @result_page_data ||= client.search(option)
   end

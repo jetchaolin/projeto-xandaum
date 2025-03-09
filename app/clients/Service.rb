@@ -5,7 +5,7 @@ module Service
       headers = {
         "Accept" => "application/json"
       }
-  
+
       Rails.cache.fetch(cache, expires_in: expiring_time) do
         response = Faraday.get(url, nil, headers)
         JSON.parse(response.body)
@@ -19,12 +19,12 @@ module Service
         ordenarPor: "dataHoraRegistro",
         ordem: "DESC",
       }.compact_blank
-  
+
       url = "https://dadosabertos.camara.leg.br/api/v2/#{subject}"
       headers = {
         "Accept" => "application/json"
       }
-  
+
       Rails.cache.fetch(cache, expires_in: expiring_time) do
         response = Faraday.get(url, params, headers)
         JSON.parse(response.body)
@@ -44,7 +44,7 @@ module Service
   end
 
   class Url
-    def self.call(main, subject, dependency = nil)  
+    def self.call(main, subject, dependency = nil)
       if main == "deputados"
         if subject[:options] == "deputado"
           url = "https://dadosabertos.camara.leg.br/api/v2/#{main}/#{subject[:id]}"
@@ -76,7 +76,7 @@ module Service
           end
         else
           url = "https://dadosabertos.camara.leg.br/api/v2/#{main}/#{subject[:id]}/#{subject[:options]}"
-        end  
+        end
 
         headers = {
           "Accept" => "application/json"
@@ -106,7 +106,7 @@ module Service
 
         headers = {
           "Accept" => "application/json"
-        }    
+        }
         response = Faraday.get(url, (params || nil), headers)
         result = JSON.parse(response.body)
         Rails.logger.debug "URL: #{result.dig('links', 0, 'href')}, #{url}"

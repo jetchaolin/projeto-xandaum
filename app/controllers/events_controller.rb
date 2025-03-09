@@ -30,7 +30,7 @@ class EventsController < ApplicationController
       @initial_date = params[:initial_date] || nil
       @final_date = params[:final_date] || nil
       @events_list = if Service::FetchList.by_date(SUBJECT, CACHE_KEY, EXPIRING_TIME, @initial_date, @final_date)["dados"].nil?
-        #TODO: Notice - "Não foi possível encontrar"
+        # TODO: Notice - "Não foi possível encontrar"
         Service::FetchList.call(SUBJECT, CACHE_KEY, EXPIRING_TIME)["dados"]
       else
         Service::FetchList.by_date(SUBJECT, CACHE_KEY, EXPIRING_TIME, @initial_date, @final_date)["dados"]
