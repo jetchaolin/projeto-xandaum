@@ -49,7 +49,7 @@ group :development, :test do
   gem "brakeman", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem "rubocop-rails-omakase", require: false
+  gem "rubocop-rails-omakase", "~> 1.1.0", require: false
 end
 
 group :development do
@@ -69,4 +69,4 @@ gem "pry-doc", "~> 1.5"
 
 gem "pry-byebug", "~> 3.8"
 
-gem "pg"
+gem "pg", "~> 1.5.9"
