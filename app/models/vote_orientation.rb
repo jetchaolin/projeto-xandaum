@@ -1,0 +1,2 @@
+class VoteOrientation < ApplicationRecord
+end

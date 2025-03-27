@@ -70,3 +70,5 @@ gem "pry-doc", "~> 1.5"
 gem "pry-byebug", "~> 3.8"
 
 gem "pg", "~> 1.5.9"
+
+gem "table_print", "~> 1.5"
