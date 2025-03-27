@@ -3,8 +3,9 @@ class PartiesController < ApplicationController
   SUBJECT = "partidos".freeze
   CACHE_KEY = "parties_all".freeze
   EXPIRING_TIME = 3.days
+  PARAMS = { itens: 100 }
   def index
-    @parties_list = Service::FetchList.call(SUBJECT, CACHE_KEY, EXPIRING_TIME)["dados"]
+    @parties_list = Service::FetchList.call(SUBJECT, CACHE_KEY, EXPIRING_TIME, PARAMS)["dados"]
     @party_selected_acronym = params[:party_acronym]
     @party_selected_id = params[:party_id]
   end
