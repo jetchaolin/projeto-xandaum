@@ -22,7 +22,7 @@ class Camara::V2::DeputySpeechAdapter
             dataHoraInicio: item.dig("faseEvento", "dataHoraInicio"), # Start time of the event phase (e.g., nil)
             dataHoraFim: item.dig("faseEvento", "dataHoraFim") # End time of the event phase (e.g., nil)
           }
-        }.compact_blank) # Remove blank values to avoid overwriting with nil        
+        }.compact_blank) # Remove blank values to avoid overwriting with nil
       end
     end
   end
